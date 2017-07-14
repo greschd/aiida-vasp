@@ -1,4 +1,4 @@
-#!runaiida
+#!/usr/bin/env runaiida
 from aiida.orm import Code, Group
 from aiida_vasp.calcs.maker import VaspMaker
 from aiida.common.exceptions import NotExistent

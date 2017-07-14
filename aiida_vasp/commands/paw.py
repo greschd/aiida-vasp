@@ -11,7 +11,7 @@ class _Paw(VerdiCommandWithSubcommands, Importable):
 
     def __init__(self):
         '''setup and register subcommands'''
-        from aiida.orm.data.vasp.paw import PawData
+        from aiida_vasp.data.paw import PawData
 
         self.dataclass = PawData
         self.valid_subcommands = {
@@ -23,7 +23,7 @@ class _Paw(VerdiCommandWithSubcommands, Importable):
 
     def uploadfamily(self, *args):
         '''Upload a new PAW pseudopotential family.'''
-        from aiida import load_dbenv
+        from aiida import load_dbenv, is_dbenv_loaded
         import os.path
         import argparse as arp
 
@@ -50,7 +50,8 @@ class _Paw(VerdiCommandWithSubcommands, Importable):
             print >> sys.stderrm, 'Cannot find directory: ' + folder
             sys.exit(1)
 
-        load_dbenv()
+        if not is_dbenv_loaded():
+            load_dbenv()
         from aiida.orm import DataFactory
         Paw = DataFactory('vasp.paw')
         files_found, files_uploaded = Paw.import_family(folder,

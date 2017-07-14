@@ -48,7 +48,8 @@ if __name__ == '__main__':
                 'vasp.amn = aiida_vasp.calcs.amn:AmnCalculation',
                 'vasp.wannier = aiida_vasp.calcs.wannier:WannierCalculation',
                 'vasp.wswannier = aiida_vasp.calcs.wswannier:WswannierCalculation',
-                'vasp.vasp5 = aiida_vasp.calcs.vasp5:Vasp5Calculation'
+                'vasp.vasp5 = aiida_vasp.calcs.vasp5:Vasp5Calculation',
+                'vasp.vasp2w90 = aiida_vasp.calcs.vasp2w90:Vasp2w90Calculation'
             ],
             'aiida.data': [
                 'vasp.archive = aiida_vasp.data.archive:ArchiveData',

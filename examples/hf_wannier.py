@@ -19,7 +19,12 @@ if __name__ == '__main__':
     if len(sys.argv) != 3:
         print(usage)
         sys.exit()
-    mkr = VaspMaker(structure=sys.argv[2], calc_cls='vasp.vasp2w90')
+    mkr = VaspMaker(
+        structure=sys.argv[2],
+        calc_cls='vasp.vasp2w90',
+        paw_map={'In': 'In_d', 'Sb': 'Sb'},
+        paw_family='pbe'
+    )
     mkr.add_settings(
         ediff=1e-5,
         lsorbit=True,
@@ -51,4 +56,4 @@ if __name__ == '__main__':
     calc.store_all()
     calc.submit()
     add_to_group(calc)
-    print 'submitted SCF : PK = {pk}'.format(pk=calc.pk)
+    print 'submitted hybrid Wannier90 calculation : PK = {pk}'.format(pk=calc.pk)

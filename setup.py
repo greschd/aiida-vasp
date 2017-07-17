@@ -63,7 +63,8 @@ if __name__ == '__main__':
                 'vasp.amn = aiida_vasp.parsers.amn:AmnParsaer',
                 'vasp.wannier = aiida_vasp.parsers.wannier:WannierParser',
                 'vasp.wswannier = aiida_vasp.parsers.wswannier:WswannierParser',
-                'vasp.vasp5 = aiida_vasp.parsers.vasp5:Vasp5Parser'
+                'vasp.vasp5 = aiida_vasp.parsers.vasp5:Vasp5Parser',
+                'vasp.vasp2w90 = aiida_vasp.parsers.vasp2w90:Vasp2w90Parser'
             ],
             'aiida.workflows': [
                 'vasp.scf = aiida_vasp.workflows.scf:ScfWorkflow',

@@ -44,9 +44,20 @@ if __name__ == '__main__':
         algo='N',
         time=0.4,
         precfock='normal',
-        lwannier90=True
+        lwrite_mmn_amn=True,
     )
     mkr.set_kpoints_mesh([6, 6, 6])
+
+    mkr.wannier_settings = DataFactory('parameter')(dict=dict(
+        num_wann=14,
+        num_bands=36,
+        projections=[
+            ['In : s; px; py; pz'],
+            ['Sb : px; py; pz']
+        ],
+        spinors=True
+    ))
+
     mkr.queue = 'dphys_compute_wk'
     mkr.resources['num_machines'] = 2
     mkr.resources['num_mpiprocs_per_machine'] = 18

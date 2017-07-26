@@ -5,7 +5,6 @@ from aiida.orm import JobCalculation, DataFactory
 
 
 class dict_to_win(object):
-
     @classmethod
     def _bool(cls, val):
         return 'T' if val else 'F'

@@ -84,26 +84,22 @@ class PawData(Data):
     def get_or_create_famgroup(cls, famname):
         """Returns a PAW family group, creates it if it didn't exists"""
         from aiida.orm import Group
-        from aiida.backends.utils import get_automatic_user
 
         group, group_created = Group.get_or_create(name=famname, type_string=cls.group_type)
 
-        if group.user != get_automatic_user():
-            raise UniquenessError("There is already a UpfFamily group "
-                                  "with name {}, but it belongs to user {},"
-                                  " therefore you cannot modify it".format(famname, group.user.email))
         return group, group_created
 
     @classmethod
     def get_paw_groups(cls, elements=None, symbols=None, user=None):
         """Find all paw groups containing potentials with the given attributes"""
         from aiida.orm import Group
-        from aiida.backends.utils import get_automatic_user
+        from aiida.backends import construct_backend
         params = {'type_string': cls.group_type, 'node_attributes': {'element': elements, 'symbol': symbols}}
-        if user:
+        if user is not None:
             params['user'] = user
         else:
-            params['user'] = get_automatic_user()
+            backend = construct_backend()
+            params['user'] = backend.users.get_automatic_user()
 
         res = Group.query(**params)
         groups = [(g.name, g) for g in res]

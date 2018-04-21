@@ -11,7 +11,7 @@ def test_vasp2w90(
         assert_finished):
     """Vasp2w90 unit test"""
     from aiida.work.run import run
-    from aiida.orm import DataFactory
+    from aiida.orm import DataFactory, load_node
     from aiida.orm.data.base import List
 
     process, inputs = get_gaas_process_inputs(
@@ -50,3 +50,5 @@ def test_vasp2w90(
     assert wannier_projections.get_attr('list') == output['wannier_projections'].get_attr('list')
 
     assert_finished(pid)
+    calc = load_node(pid)
+    assert calc.get_hash() == calc.get_extra('hash')

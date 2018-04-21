@@ -13,6 +13,10 @@ computers:
     scheduler: slurm
     work_directory: /mnt/lnec/{username}/test_aiida_tbextraction_run/
     num_cpus: 20
+    queue_name: express_compute
+    configuration:
+      username: greschd
+      proxy_command: ssh -W monch.cscs.ch:22 ela.cscs.ch
 
 codes:
   vasp:
